@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { t } from '../utils/i18n';
+
+const lang = Astro.currentLocale;
+const pageTitle = t('blog.title', lang) + " | " + t('site.title', lang);
+const pageDescription = t('blog.description', lang);
+
+// Sample blog posts - replace with actual data from CMS or markdown files
+const posts = [
+  {
+    id: 1,
+    title: "Building Modern Web Applications with Astro",
+    excerpt: "Discover how Astro's island architecture can help you build faster, more efficient web applications.",
+    date: "2025-01-15",
+    slug: "building-modern-web-apps-with-astro",
+    tags: ["Astro", "Web Development", "Performance"]
+  },
+  {
+    id: 2,
+    title: "The Power of TypeScript in Full-Stack Development",
+    excerpt: "Learn how TypeScript can improve code quality and developer experience across your entire stack.",
+    date: "2025-01-10",
+    slug: "typescript-fullstack-development",
+    tags: ["TypeScript", "Full-Stack", "Best Practices"]
+  },
+  {
+    id: 3,
+    title: "Implementing AI Features in Web Applications",
+    excerpt: "A practical guide to integrating AI and machine learning capabilities into your web projects.",
+    date: "2025-01-05",
+    slug: "ai-features-web-apps",
+    tags: ["AI", "Machine Learning", "Python"]
+  }
+];
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang}>
+  <section class="py-16 md:py-24">
+    <div class="max-w-container mx-auto px-6">
+      <header class="mb-12 text-center">
+        <h1 class="font-heading text-h1 text-secondary dark:text-white mb-4">{t('blog.title', lang)}</h1>
+        <p class="text-body text-secondary/80 dark:text-white/80 max-w-2xl mx-auto">{t('blog.subtitle', lang)}</p>
+      </header>
+
+      <div class="max-w-4xl mx-auto">
+        {posts.map((post, index) => (
+          <article
+            class="mb-8 bg-white dark:bg-neutral-dark p-6 md:p-8 rounded-lg shadow hover:shadow-lg transition-shadow duration-300"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+          >
+            <div class="flex flex-wrap gap-2 mb-3">
+              {post.tags.map(tag => (
+                <span class="text-xs px-3 py-1 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <h2 class="font-heading text-h3 text-secondary dark:text-white mb-3 hover:text-primary dark:hover:text-primary-light transition-colors">
+              <a href={`/blog/${post.slug}/`}>{post.title}</a>
+            </h2>
+
+            <time class="text-sm text-secondary/60 dark:text-white/60 mb-4 block">
+              {new Date(post.date).toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+
+            <p class="text-body text-secondary/80 dark:text-white/80 mb-4">
+              {post.excerpt}
+            </p>
+
+            <a
+              href={`/blog/${post.slug}/`}
+              class="inline-flex items-center text-primary dark:text-primary-light hover:underline font-medium"
+            >
+              {t('blog.readMore', lang)}
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

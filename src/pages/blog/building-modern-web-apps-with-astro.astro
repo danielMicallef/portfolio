@@ -1,0 +1,145 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { t } from '../../utils/i18n';
+
+const lang = Astro.currentLocale;
+
+// Blog post metadata
+const post = {
+  title: "Building Modern Web Applications with Astro",
+  date: "2025-01-15",
+  author: "Daniel Micallef",
+  tags: ["Astro", "Web Development", "Performance"],
+  excerpt: "Discover how Astro's island architecture can help you build faster, more efficient web applications."
+};
+
+const pageTitle = post.title + " | " + t('blog.title', lang) + " | " + t('site.title', lang);
+const pageDescription = post.excerpt;
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang}>
+  <article class="py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-6">
+      <!-- Back to Blog -->
+      <a
+        href="/blog/"
+        class="inline-flex items-center text-primary dark:text-primary-light hover:underline mb-8"
+      >
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Blog
+      </a>
+
+      <!-- Article Header -->
+      <header class="mb-12">
+        <div class="flex flex-wrap gap-2 mb-4">
+          {post.tags.map(tag => (
+            <span class="text-xs px-3 py-1 bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <h1 class="font-heading text-h1 text-secondary dark:text-white mb-4">{post.title}</h1>
+
+        <div class="flex items-center text-secondary/60 dark:text-white/60 text-sm">
+          <span>{post.author}</span>
+          <span class="mx-3">•</span>
+          <time>
+            {new Date(post.date).toLocaleDateString(lang === 'de' ? 'de-DE' : 'en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </time>
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="prose dark:prose-invert max-w-none bg-white dark:bg-neutral-dark p-6 md:p-8 rounded-lg shadow">
+        <p class="lead">
+          In the ever-evolving landscape of web development, performance and developer experience are paramount.
+          Astro emerges as a game-changer, offering a fresh approach to building modern web applications with its
+          innovative island architecture.
+        </p>
+
+        <h2>What Makes Astro Different?</h2>
+        <p>
+          Astro takes a unique approach to web development by shipping zero JavaScript by default. Instead of
+          sending entire JavaScript frameworks to the browser, Astro only sends the minimal JavaScript needed
+          for interactive components. This results in faster page loads and better performance metrics.
+        </p>
+
+        <h3>The Island Architecture</h3>
+        <p>
+          Astro's island architecture allows you to build your site with "islands" of interactivity in a sea of
+          static HTML. Each component can be independently hydrated, meaning you can use React, Vue, Svelte, or
+          any other framework for specific interactive parts while keeping the rest of your site static.
+        </p>
+
+        <h2>Key Benefits</h2>
+        <ul>
+          <li><strong>Performance First:</strong> Send less JavaScript, load pages faster</li>
+          <li><strong>Framework Agnostic:</strong> Use your favorite UI framework or mix and match</li>
+          <li><strong>Developer Experience:</strong> Write components in any framework you're comfortable with</li>
+          <li><strong>SEO Friendly:</strong> Server-side rendering by default ensures search engines can crawl your content</li>
+          <li><strong>Edge Ready:</strong> Deploy to edge networks for global performance</li>
+        </ul>
+
+        <h2>Building with Astro</h2>
+        <p>
+          Getting started with Astro is straightforward. The framework provides excellent documentation and a
+          growing ecosystem of integrations. Whether you're building a blog, portfolio, documentation site, or
+          full-featured web application, Astro offers the tools and flexibility you need.
+        </p>
+
+        <h3>Component Example</h3>
+        <p>
+          Here's a simple example of an Astro component that demonstrates the clean syntax and powerful
+          capabilities:
+        </p>
+
+        <pre>
+
+        <h2>When to Use Astro</h2>
+        <p>
+          Astro excels in scenarios where content is king and performance matters. It's perfect for:
+        </p>
+        <ul>
+          <li>Marketing and content-focused websites</li>
+          <li>Documentation sites</li>
+          <li>Blogs and portfolios</li>
+          <li>E-commerce product pages</li>
+          <li>Landing pages with high conversion goals</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>
+          Astro represents a paradigm shift in how we think about building web applications. By focusing on
+          performance, flexibility, and developer experience, it provides a compelling solution for modern web
+          development. Whether you're building a simple blog or a complex application, Astro's island architecture
+          offers the tools and performance you need to succeed.
+        </p>
+
+        <p>
+          Ready to get started? Check out the <a href="https://astro.build" target="_blank" rel="noopener noreferrer">official Astro documentation</a>
+          and start building faster, more efficient web applications today.
+        </p>
+      </div>
+
+      <!-- Share or navigation section -->
+      <div class="mt-12 pt-8 border-t border-secondary/10 dark:border-white/10">
+        <a
+          href="/blog/"
+          class="inline-flex items-center text-primary dark:text-primary-light hover:underline"
+        >
+          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to All Posts
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
