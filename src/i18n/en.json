@@ -193,7 +193,8 @@
     "phoneTitle": "Phone",
     "phoneButtonText": "Call",
     "linkedinTitle": "LinkedIn",
-    "linkedinButtonText": "Open Profile"
+    "linkedinButtonText": "Open Profile",
+    "contactFormLink": "https://formspree.io/f/mzzjnleq"
   },
   "footer": {
     "copyright": "All rights reserved.",

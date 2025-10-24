@@ -7,6 +7,7 @@ import { email, phone, linkedin_short, linkedin_url } from '../utils/me';
 const lang = Astro.currentLocale || 'en';
 const pageTitle = "Contact | " + t('site.title', lang);
 const pageDescription = "Get in touch to discuss your project. Whether you need a website, SaaS product, or business automation, let's talk.";
+const contactFormLink = t('contact.contactFormLink', lang);
 ---
 
 <Layout title={pageTitle} description={pageDescription} lang={lang}>
@@ -35,7 +36,7 @@ const pageDescription = "Get in touch to discuss your project. Whether you need 
 
       <!-- Contact Form - Full Width -->
       <div class="max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-delay="100">
-        <form id="contactForm" class="space-y-6">
+        <form id="contactForm" class="space-y-6" data-formspree-url={contactFormLink}>
           <!-- Name & Email Row -->
           <div class="grid md:grid-cols-2 gap-6">
             <div>
@@ -242,8 +243,12 @@ const pageDescription = "Get in touch to discuss your project. Whether you need 
         const formData = new FormData(form);
 
         try {
+          const formspreeUrl = form.dataset.formspreeUrl;
+          if (!formspreeUrl) {
+            throw new Error("Formspree URL is not defined");
+          }
           // Submit to Formspree
-          const response = await fetch('https://formspree.io/f/mzzjnleq', {
+          const response = await fetch(formspreeUrl, {
             method: 'POST',
             body: formData,
             headers: {
