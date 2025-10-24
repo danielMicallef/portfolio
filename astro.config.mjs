@@ -6,6 +6,7 @@ import preact from '@astrojs/preact';
 
 export default defineConfig({
   site: 'https://danielmicallef.xyz',
+  // base: "/astro-multilingual-portfolio-template",
   output: 'static',
   trailingSlash: 'ignore',
 
