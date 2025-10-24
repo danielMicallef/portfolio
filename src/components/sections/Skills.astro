@@ -1,6 +1,11 @@
 ---
-import { BrainIcon, TableIcon, ChartColumnIcon, PanelsTopLeftIcon, CodeXmlIcon, NetworkIcon, DatabaseIcon, WorkflowIcon, CloudIcon, BoxIcon, FileCode2Icon, TreePineIcon, WindIcon, AccessibilityIcon, CoffeeIcon, LucideServer, BracesIcon, LayersIcon, TerminalIcon, SendIcon } from '@lucide/astro';
-
+import { 
+  BrainIcon, TableIcon, PanelsTopLeftIcon, CodeXmlIcon, NetworkIcon, DatabaseIcon, 
+  WorkflowIcon, CloudIcon, BoxIcon, FileCode2Icon, WindIcon, AccessibilityIcon, 
+  LucideServer, BracesIcon, SendIcon, CodeIcon, Webhook, Zap, MessageSquare, 
+  Waves, ServerIcon, Rocket, Mountain, BrainCircuit, BarChart, Bot, Flame, 
+  GitCommitHorizontal, Shield, Star, Timer, MousePointerClick, Leaf, DatabaseZap 
+} from '@lucide/astro';
 import { t } from '../../utils/i18n';
 
 interface Props {
@@ -16,15 +21,15 @@ const skillClusters = [
     description: t('skills.clusters.backend.description', lang),
     icon: LucideServer,
     tools: [
-      { name: 'Python', icon: TerminalIcon },
-      { name: 'Django', icon: TerminalIcon },
-      { name: 'FastAPI', icon: TerminalIcon },
+      { name: 'Python', icon: CodeIcon },
+      { name: 'Django', icon: Webhook },
+      { name: 'FastAPI', icon: Zap },
       { name: 'REST', icon: NetworkIcon },
-      { name: 'RabbitMQ', icon: DatabaseIcon },
-      { name: 'Kafka', icon: DatabaseIcon },
+      { name: 'RabbitMQ', icon: MessageSquare },
+      { name: 'Kafka', icon: Waves },
       { name: 'GCP & AWS', icon: CloudIcon },
       { name: 'Docker', icon: BoxIcon },
-      { name: 'Nginx', icon: BoxIcon },
+      { name: 'Nginx', icon: ServerIcon },
     ]
   },
   {
@@ -36,8 +41,8 @@ const skillClusters = [
       { name: 'JavaScript', icon: BracesIcon },
       { name: 'TypeScript', icon: FileCode2Icon },
       { name: 'React', icon: PanelsTopLeftIcon },
-      { name: 'AstroJS', icon: TreePineIcon },
-      { name: 'AlpineJS', icon: ChartColumnIcon },
+      { name: 'AstroJS', icon: Rocket },
+      { name: 'AlpineJS', icon: Mountain },
       { name: 'HTML/CSS', icon: CodeXmlIcon },
       { name: 'TailwindCSS & DaisyUI', icon: WindIcon },
       { name: 'Accessibility', icon: AccessibilityIcon },
@@ -51,26 +56,26 @@ const skillClusters = [
     tools: [
       { name: 'SciKit Learn', icon: WorkflowIcon },
       { name: 'Pandas', icon: TableIcon },
-      { name: 'ML Model Integration', icon: BrainIcon },
-      { name: 'Visualizations', icon: ChartColumnIcon },
-      { name: 'PydanticAI & LLM Integration', icon: ChartColumnIcon },
-      { name: 'Pytorch', icon: ChartColumnIcon },
+      { name: 'ML Model Integration', icon: BrainCircuit },
+      { name: 'Visualizations', icon: BarChart },
+      { name: 'PydanticAI & LLM Integration', icon: Bot },
+      { name: 'Pytorch', icon: Flame },
     ]
   },
   {
     id: 'databases',
     title: t('skills.clusters.databases.title', lang),
     description: t('skills.clusters.databases.description', lang),
-    icon: BrainIcon,
+    icon: DatabaseIcon,
     tools: [
       { name: 'PostgreSQL', icon: DatabaseIcon },
-      { name: 'PG Vector', icon: DatabaseIcon },
-      { name: 'Qdrant', icon: DatabaseIcon },
-      { name: 'Milvus', icon: DatabaseIcon },
-      { name: 'Timescale DB', icon: DatabaseIcon },
-      { name: 'Clickhouse', icon: DatabaseIcon },
-      { name: 'MongoDB', icon: DatabaseIcon },
-      { name: 'Redis', icon: DatabaseIcon },
+      { name: 'PG Vector', icon: GitCommitHorizontal },
+      { name: 'Qdrant', icon: Shield },
+      { name: 'Milvus', icon: Star },
+      { name: 'Timescale DB', icon: Timer },
+      { name: 'Clickhouse', icon: MousePointerClick },
+      { name: 'MongoDB', icon: Leaf },
+      { name: 'Redis', icon: DatabaseZap },
       { name: 'Supabase', icon: SendIcon },
     ]
   }
