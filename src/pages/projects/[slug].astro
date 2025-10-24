@@ -1,0 +1,203 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { t } from '../../utils/i18n';
+
+export async function getStaticPaths() {
+  const projects = [
+    {
+      slug: 'seaview-apartment-xlendi',
+      key: 'seaviewApartment',
+      title: 'Seaview Apartment Xlendi',
+      image: '/images/projects/seaview.png'
+    },
+    {
+      slug: 'brew-guide',
+      key: 'brewGuide',
+      title: 'Brewguide.info',
+      image: '/images/projects/brewguide.png'
+    },
+    {
+      slug: 'sports-nutrition',
+      key: 'sportsNutrition',
+      title: 'Sports Nutrition Website',
+      image: '/images/projects/rebmdsportsnutrition.png'
+    }
+  ];
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+const { project } = Astro.props;
+const lang = Astro.currentLocale || 'en';
+
+const projectData = {
+  title: project.title,
+  tags: t(`projects.${project.key}.tags`, lang),
+  shortDescription: t(`projects.${project.key}.shortDescription`, lang),
+  challenge: t(`projects.${project.key}.challenge`, lang),
+  approach: t(`projects.${project.key}.approach`, lang),
+  result: t(`projects.${project.key}.result`, lang),
+  link: t(`projects.${project.key}.link`, lang),
+  image: project.image
+};
+
+const pageTitle = `${projectData.title} | ${t('site.title', lang)}`;
+const pageDescription = projectData.shortDescription;
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang}>
+  <!-- Back to Projects -->
+  <section class="py-8 bg-neutral-bg dark:bg-neutral-dark/60">
+    <div class="max-w-container mx-auto px-6">
+      <a
+        href="/#projects"
+        class="inline-flex items-center text-secondary/60 dark:text-white/60 hover:text-primary dark:hover:text-primary-light transition-colors"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Projects
+      </a>
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-container mx-auto px-6">
+      <!-- Project Header -->
+      <div class="max-w-4xl mx-auto mb-12" data-aos="fade-up">
+        <div class="flex flex-wrap gap-2 mb-6">
+          {projectData.tags.map(tag => (
+            <span class="px-4 py-2 text-sm font-mono bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-light rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <h1 class="font-heading text-h1 text-secondary dark:text-white mb-6">
+          {projectData.title}
+        </h1>
+
+        <p class="text-xl text-secondary/80 dark:text-white/80">
+          {projectData.shortDescription}
+        </p>
+
+        {projectData.link && (
+          <div class="mt-6">
+            <a
+              href={projectData.link.startsWith('http') ? projectData.link : `https://${projectData.link}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-primary dark:text-primary-light hover:underline font-medium"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+              Visit Website
+            </a>
+          </div>
+        )}
+      </div>
+
+      <!-- Project Image -->
+      <div class="max-w-5xl mx-auto mb-16" data-aos="fade-up" data-aos-delay="100">
+        <div class="rounded-2xl overflow-hidden shadow-2xl">
+          <img
+            src={projectData.image}
+            alt={projectData.title}
+            class="w-full h-auto"
+            loading="eager"
+          />
+        </div>
+      </div>
+
+      <!-- Project Details -->
+      <div class="max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-1 gap-12">
+          <!-- Challenge -->
+          <div data-aos="fade-up" data-aos-delay="200">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <h2 class="font-heading text-2xl text-secondary dark:text-white mb-4">
+                  The Challenge
+                </h2>
+                <p class="text-secondary/80 dark:text-white/80 leading-relaxed">
+                  {projectData.challenge}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Approach -->
+          <div data-aos="fade-up" data-aos-delay="300">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <h2 class="font-heading text-2xl text-secondary dark:text-white mb-4">
+                  The Approach
+                </h2>
+                <p class="text-secondary/80 dark:text-white/80 leading-relaxed">
+                  {projectData.approach}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div data-aos="fade-up" data-aos-delay="400">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <h2 class="font-heading text-2xl text-secondary dark:text-white mb-4">
+                  The Result
+                </h2>
+                <p class="text-secondary/80 dark:text-white/80 leading-relaxed">
+                  {projectData.result}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-neutral-bg dark:bg-neutral-dark/60">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="font-heading text-h2 text-secondary dark:text-white mb-6" data-aos="fade-up">
+        Ready to Start Your Project?
+      </h2>
+      <p class="text-xl text-secondary/80 dark:text-white/80 mb-8" data-aos="fade-up" data-aos-delay="100">
+        Let's discuss how I can help bring your ideas to life.
+      </p>
+      <a
+        href="/#contact"
+        class="inline-flex items-center gap-2 bg-primary dark:bg-primary hover:bg-primary/90 dark:hover:bg-primary-light text-white font-medium py-4 px-8 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        <span>Get in Touch</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+</Layout>

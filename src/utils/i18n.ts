@@ -7,7 +7,7 @@ const translations = {
 type TranslationKeys = keyof typeof enTranslations; // Or enTranslations, assuming they have the same keys
 
 // Helper function to safely access nested keys like "nav.start"
-function getNestedValue(obj: any, path: string): string | undefined {
+function getNestedValue(obj: any, path: string): any {
   const keys = path.split('.');
   let current = obj;
   for (const key of keys) {
@@ -17,10 +17,10 @@ function getNestedValue(obj: any, path: string): string | undefined {
       return undefined;
     }
   }
-  return typeof current === 'string' ? current : undefined;
+  return current;
 }
 
-export function t(key: string, lang: string | undefined): string {
+export function t(key: string, lang: string | undefined): any {
   const currentLang = lang || 'en'; // Default to 'en' if lang is undefined
   const langTranslations = translations[currentLang as keyof typeof translations] || translations.en;
 

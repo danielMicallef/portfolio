@@ -1,0 +1,282 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { t } from '../utils/i18n';
+import Obfuscate from 'react-obfuscate';
+import { email, phone, linkedin_short, linkedin_url } from '../utils/me';
+
+const lang = Astro.currentLocale || 'en';
+const pageTitle = "Contact | " + t('site.title', lang);
+const pageDescription = "Get in touch to discuss your project. Whether you need a website, SaaS product, or business automation, let's talk.";
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang}>
+  <!-- Main Contact Section -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <!-- Header -->
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h1 class="font-heading text-h1 text-secondary dark:text-white mb-4">
+          {t('contact.title', lang)}
+        </h1>
+        <p class="text-lg text-secondary/70 dark:text-white/70 max-w-2xl mx-auto">
+          {t('contact.subtitle', lang)}
+        </p>
+      </div>
+
+      <!-- Toast Notification -->
+      <div id="toast" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg transform translate-x-[400px] transition-transform duration-300 z-50">
+        <div class="flex items-center gap-3">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span class="font-medium">Message sent successfully!</span>
+        </div>
+      </div>
+
+      <!-- Contact Form - Full Width -->
+      <div class="max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-delay="100">
+        <form id="contactForm" class="space-y-6">
+          <!-- Name & Email Row -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="fullName" class="block text-sm font-medium text-secondary dark:text-white mb-2">
+                Full Name <span class="text-primary">*</span>
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                required
+                class="w-full px-4 py-3 bg-white dark:bg-neutral-dark border border-secondary/20 dark:border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-secondary dark:text-white transition-all"
+                placeholder="John Doe"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-secondary dark:text-white mb-2">
+                Email <span class="text-primary">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 bg-white dark:bg-neutral-dark border border-secondary/20 dark:border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-secondary dark:text-white transition-all"
+                placeholder="john@example.com"
+              />
+            </div>
+          </div>
+
+          <!-- Phone & Service Row -->
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label for="phone" class="block text-sm font-medium text-secondary dark:text-white mb-2">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="w-full px-4 py-3 bg-white dark:bg-neutral-dark border border-secondary/20 dark:border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-secondary dark:text-white transition-all"
+                placeholder="+356 1234 5678"
+              />
+            </div>
+
+            <div>
+              <label for="service" class="block text-sm font-medium text-secondary dark:text-white mb-2">
+                Service Interest <span class="text-primary">*</span>
+              </label>
+              <select
+                id="service"
+                name="service"
+                required
+                class="w-full px-4 py-3 bg-white dark:bg-neutral-dark border border-secondary/20 dark:border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-secondary dark:text-white transition-all"
+              >
+                <option value="">Select a service...</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Product Development">Product Development (SaaS)</option>
+                <option value="Business Automation">Business Automation</option>
+                <option value="Other">Other / Not Sure</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-sm font-medium text-secondary dark:text-white mb-2">
+              Message <span class="text-primary">*</span>
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+              class="w-full px-4 py-3 bg-white dark:bg-neutral-dark border border-secondary/20 dark:border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-secondary dark:text-white resize-none transition-all"
+              placeholder="Tell me about your project..."
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            id="submitBtn"
+            class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-4 px-6 rounded-lg transition-all duration-300 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span id="btnText">Send Message</span>
+            <span id="btnLoading" class="hidden">Sending...</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Cards -->
+      <div class="max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+        <div class="text-center mb-8">
+          <p class="text-secondary/70 dark:text-white/70">
+            Or reach out directly
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Email Card -->
+          <Obfuscate
+            email={email}
+            obfuscateChildren={false}
+            client:only="preact"
+            className="group bg-white dark:bg-neutral-dark border border-secondary/10 dark:border-white/10 rounded-lg p-6 hover:shadow-lg transition-all duration-300 text-center"
+          >
+            <div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+            </div>
+            <h3 class="font-heading text-sm font-semibold text-secondary dark:text-white mb-2">
+              {t('contact.emailTitle', lang)}
+            </h3>
+            <p class="text-sm text-secondary/70 dark:text-white/70 break-all">
+              <Obfuscate element="span" email={email} client:only="preact" />
+            </p>
+          </Obfuscate>
+
+          <!-- Phone Card -->
+          <Obfuscate
+            tel={phone.replace(/[^+0-9]/g, "")}
+            obfuscateChildren={false}
+            client:only="preact"
+            className="group bg-white dark:bg-neutral-dark border border-secondary/10 dark:border-white/10 rounded-lg p-6 hover:shadow-lg transition-all duration-300 text-center"
+          >
+            <div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <h3 class="font-heading text-sm font-semibold text-secondary dark:text-white mb-2">
+              {t('contact.phoneTitle', lang)}
+            </h3>
+            <p class="text-sm text-secondary/70 dark:text-white/70">
+              <Obfuscate element="span" tel={phone} client:only="preact" />
+            </p>
+          </Obfuscate>
+
+          <!-- LinkedIn Card -->
+          <a
+            href={linkedin_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-white dark:bg-neutral-dark border border-secondary/10 dark:border-white/10 rounded-lg p-6 hover:shadow-lg transition-all duration-300 text-center"
+          >
+            <div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-primary dark:text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect width="4" height="12" x="2" y="9"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </div>
+            <h3 class="font-heading text-sm font-semibold text-secondary dark:text-white mb-2">
+              {t('contact.linkedinTitle', lang)}
+            </h3>
+            <p class="text-sm text-secondary/70 dark:text-white/70">
+              {linkedin_short}
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm') as HTMLFormElement;
+    const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+    const btnText = document.getElementById('btnText') as HTMLSpanElement;
+    const btnLoading = document.getElementById('btnLoading') as HTMLSpanElement;
+    const toast = document.getElementById('toast') as HTMLDivElement;
+    const serviceSelect = document.getElementById('service') as HTMLSelectElement;
+
+    // Pre-select service from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceParam = urlParams.get('service');
+
+    if (serviceParam && serviceSelect) {
+      // Find the matching option and select it
+      const options = serviceSelect.options;
+      for (let i = 0; i < options.length; i++) {
+        if (options[i].value === serviceParam) {
+          serviceSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Disable button and show loading state
+        submitBtn.disabled = true;
+        btnText.classList.add('hidden');
+        btnLoading.classList.remove('hidden');
+
+        // Get form data
+        const formData = new FormData(form);
+
+        try {
+          // Submit to Formspree
+          const response = await fetch('https://formspree.io/f/mzzjnleq', {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            // Show toast
+            toast.style.transform = 'translateX(0)';
+
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+              toast.style.transform = 'translateX(400px)';
+            }, 3000);
+
+            // Redirect to services page after 1 second
+            setTimeout(() => {
+              window.location.href = '/services/';
+            }, 1000);
+          } else {
+            throw new Error('Form submission failed');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('There was an error sending your message. Please try again.');
+
+          // Reset button state
+          submitBtn.disabled = false;
+          btnText.classList.remove('hidden');
+          btnLoading.classList.add('hidden');
+        }
+      });
+    }
+  });
+</script>

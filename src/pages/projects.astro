@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { t } from '../utils/i18n';
+import Button from '../components/ui/Buttons.astro';
+
+const lang = Astro.currentLocale || 'en';
+const pageTitle = "Projects | " + t('site.title', lang);
+const pageDescription = "Explore my portfolio of web development projects including landing pages, SaaS applications, and content websites.";
+
+const projects = [
+  {
+    title: 'Seaview Apartment Xlendi',
+    slug: 'seaview-apartment-xlendi',
+    image: '/images/projects/seaview.png',
+    tags: t('projects.seaviewApartment.tags', lang),
+    shortDescription: t('projects.seaviewApartment.shortDescription', lang),
+    link: t('projects.seaviewApartment.link', lang)
+  },
+  {
+    title: 'Brewguide.info',
+    slug: 'brew-guide',
+    image: '/images/projects/brewguide.png',
+    tags: t('projects.brewGuide.tags', lang),
+    shortDescription: t('projects.brewGuide.shortDescription', lang),
+    link: t('projects.brewGuide.link', lang)
+  },
+  {
+    title: 'Sports Nutrition Website',
+    slug: 'sports-nutrition',
+    image: '/images/projects/rebmdsportsnutrition.png',
+    tags: t('projects.sportsNutrition.tags', lang),
+    shortDescription: t('projects.sportsNutrition.shortDescription', lang),
+    link: t('projects.sportsNutrition.link', lang)
+  }
+];
+---
+
+<Layout title={pageTitle} description={pageDescription} lang={lang}>
+  <!-- Hero Section -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-container mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+        <h1 class="font-heading text-h1 text-secondary dark:text-white mb-6">
+          {t('projects.title', lang)}
+        </h1>
+        <p class="text-xl text-secondary/70 dark:text-white/70">
+          {t('projects.subtitle', lang)}
+        </p>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {projects.map((project, index) => (
+          <div
+            class="group bg-white dark:bg-neutral-dark border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+          >
+            <!-- Project Image -->
+            <div class="relative overflow-hidden aspect-video">
+              <img
+                src={project.image}
+                alt={project.title}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+              <!-- Tags Overlay -->
+              <div class="absolute top-4 left-4 flex flex-wrap gap-2">
+                {project.tags.map(tag => (
+                  <span class="px-3 py-1 text-xs font-mono bg-white/90 dark:bg-neutral-dark/90 backdrop-blur-sm text-primary rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <!-- Visit Link Overlay -->
+              {project.link && (
+                <div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <a
+                    href={project.link.startsWith('http') ? project.link : `https://${project.link}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 bg-white dark:bg-neutral-dark text-primary dark:text-primary-light px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary hover:text-white dark:hover:bg-primary-light transition-colors"
+                    onclick="event.stopPropagation();"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                    Visit
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <!-- Project Content -->
+            <div class="p-6">
+              <h3 class="font-heading text-xl text-secondary dark:text-white mb-3 group-hover:text-primary transition-colors duration-300">
+                {project.title}
+              </h3>
+              <p class="text-secondary/70 dark:text-white/70 mb-6 line-clamp-3">
+                {project.shortDescription}
+              </p>
+
+              <Button
+                text={t('projects.buttonText', lang)}
+                href={`/projects/${project.slug}/`}
+                variant="outline"
+                size="sm"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-neutral-bg dark:bg-neutral-dark/60">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="font-heading text-h2 text-secondary dark:text-white mb-6" data-aos="fade-up">
+        Have a Project in Mind?
+      </h2>
+      <p class="text-xl text-secondary/80 dark:text-white/80 mb-8" data-aos="fade-up" data-aos-delay="100">
+        Let's work together to bring your vision to life.
+      </p>
+      <a
+        href="/#contact"
+        class="inline-flex items-center gap-2 bg-primary dark:bg-primary hover:bg-primary/90 dark:hover:bg-primary-light text-white font-medium py-4 px-8 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        <span>Get in Touch</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+</Layout>

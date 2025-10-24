@@ -6,33 +6,24 @@ const lang = Astro.currentLocale;
 const pageTitle = t('blog.title', lang) + " | " + t('site.title', lang);
 const pageDescription = t('blog.description', lang);
 
-// Sample blog posts - replace with actual data from CMS or markdown files
-const posts = [
-  {
-    id: 1,
-    title: "Building Modern Web Applications with Astro",
-    excerpt: "Discover how Astro's island architecture can help you build faster, more efficient web applications.",
-    date: "2025-01-15",
-    slug: "building-modern-web-apps-with-astro",
-    tags: ["Astro", "Web Development", "Performance"]
-  },
-  {
-    id: 2,
-    title: "The Power of TypeScript in Full-Stack Development",
-    excerpt: "Learn how TypeScript can improve code quality and developer experience across your entire stack.",
-    date: "2025-01-10",
-    slug: "typescript-fullstack-development",
-    tags: ["TypeScript", "Full-Stack", "Best Practices"]
-  },
-  {
-    id: 3,
-    title: "Implementing AI Features in Web Applications",
-    excerpt: "A practical guide to integrating AI and machine learning capabilities into your web projects.",
-    date: "2025-01-05",
-    slug: "ai-features-web-apps",
-    tags: ["AI", "Machine Learning", "Python"]
-  }
-];
+// Get all markdown files from the blog folder
+const allPosts = await Astro.glob('./blog/*.md');
+
+// Filter out drafts and sort by date (newest first)
+const posts = allPosts
+  .filter(post => !post.frontmatter.draft)
+  .map(post => {
+    // Extract slug from file path
+    const slug = post.file.split('/').pop()?.replace('.md', '') || '';
+    return {
+      title: post.frontmatter.title,
+      excerpt: post.frontmatter.lead || post.frontmatter.excerpt || '',
+      date: post.frontmatter.date,
+      slug: slug,
+      tags: post.frontmatter.tags || []
+    };
+  })
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 ---
 
 <Layout title={pageTitle} description={pageDescription} lang={lang}>

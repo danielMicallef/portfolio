@@ -10,34 +10,34 @@ const { lang } = Astro.props;
 
 const projects = [
   {
-    title: 'Relaunch DB Training Website',
-    slug: 'db-training-relaunch',
-    image: '/images/projects/db-training.jpg',
-    tags: [t('projects.tags.uxUiDesign', lang), t('projects.tags.projectManagement', lang)],
-    shortDescription: t('projects.dbTrainingRelaunch.shortDescription', lang),
-    challenge: t('projects.dbTrainingRelaunch.challenge', lang),
-    approach: t('projects.dbTrainingRelaunch.approach', lang),
-    result: t('projects.dbTrainingRelaunch.result', lang)
+    title: 'Seaview Apartment Xlendi',
+    slug: 'seaview-apartment-xlendi',
+    image: '/images/projects/seaview.png',
+    tags: t('projects.seaviewApartment.tags', lang),
+    shortDescription: t('projects.seaviewApartment.shortDescription', lang),
+    challenge: t('projects.seaviewApartment.challenge', lang),
+    approach: t('projects.seaviewApartment.approach', lang),
+    result: t('projects.seaviewApartment.result', lang)
   },
   {
-    title: 'Kampagnen-Dashboard für Media-Tracking',
-    slug: 'media-dashboard',
-    image: '/images/projects/media-dashboard.jpg',
-    tags: [t('projects.tags.dataVisualization', lang), t('projects.tags.webDevelopment', lang)],
-    shortDescription: t('projects.mediaDashboard.shortDescription', lang),
-    challenge: t('projects.mediaDashboard.challenge', lang),
-    approach: t('projects.mediaDashboard.approach', lang),
-    result: t('projects.mediaDashboard.result', lang)
+    title: 'Brewguide.info',
+    slug: 'brew-guide',
+    image: '/images/projects/brewguide.png',
+    tags: t('projects.brewGuide.tags', lang),
+    shortDescription: t('projects.brewGuide.shortDescription', lang),
+    challenge: t('projects.brewGuide.challenge', lang),
+    approach: t('projects.brewGuide.approach', lang),
+    result: t('projects.brewGuide.result', lang)
   },
   {
-    title: 'Erklärvideos für DB Digitalisierungsprogramm',
-    slug: 'db-explainer-videos',
-    image: '/images/projects/explainer-videos.jpg',
-    tags: [t('projects.tags.motionDesign', lang), t('projects.tags.scriptStoryboard', lang)],
-    shortDescription: t('projects.dbExplainerVideos.shortDescription', lang),
-    challenge: t('projects.dbExplainerVideos.challenge', lang),
-    approach: t('projects.dbExplainerVideos.approach', lang),
-    result: t('projects.dbExplainerVideos.result', lang)
+    title: 'Sports Nutrition Website',
+    slug: 'sports-nutrition',
+    image: '/images/projects/rebmdsportsnutrition.png',
+    tags: t('projects.sportsNutrition.tags', lang),
+    shortDescription: t('projects.sportsNutrition.shortDescription', lang),
+    challenge: t('projects.sportsNutrition.challenge', lang),
+    approach: t('projects.sportsNutrition.approach', lang),
+    result: t('projects.sportsNutrition.result', lang)
   }
 ];
 ---
@@ -84,7 +84,7 @@ const projects = [
 
             <Button
               text={t('projects.buttonText', lang)}
-              href={`/projects/${project.slug}`}
+              href={`/projects/${project.slug}/`}
               variant="outline"
               size="sm"
             />
