@@ -21,7 +21,7 @@ export const github_username = "danielMicallef";
  |     btoa('max-example@example.com')                                         |
  |                                                                             |
  \============================================================================*/
-const email_base64_encoded = "ZGFuaWVsbWljYWxsZWY5NC5jb20=";
+const email_base64_encoded = "aW5mb0BkYW5pZWxtaWNhbGxlZi5kZXY=";
 const phone_base64_encoded = "KzM1Njc5NDE2NTY5";
 
 // The address fields below are for the privacy policy. They are also Base64 encoded.
