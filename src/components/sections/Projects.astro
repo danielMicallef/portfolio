@@ -54,7 +54,7 @@ const projects = [
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
       {projects.map((project, index) => (
         <div
-          class="md:col-span-4 group bg-white dark:bg-neutral-dark border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+          class="md:col-span-4 group bg-white dark:bg-neutral-dark border border-gray-100 dark:border-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col"
           data-aos="fade-up"
           data-aos-delay={index * 100}
         >
@@ -74,20 +74,24 @@ const projects = [
             </div>
           </div>
 
-          <div class="p-6">
-            <h3 class="font-heading text-xl text-secondary dark:text-white mb-3 group-hover:text-primary transition-colors duration-300">
-              {project.title}
-            </h3>
-            <p class="text-secondary/70 dark:text-white/70 mb-6">
-              {project.shortDescription}
-            </p>
+          <div class="p-6 flex flex-col flex-grow">
+            <div>
+              <h3 class="font-heading text-xl text-secondary dark:text-white mb-3 group-hover:text-primary transition-colors duration-300">
+                {project.title}
+              </h3>
+              <p class="text-secondary/70 dark:text-white/70 mb-6">
+                {project.shortDescription}
+              </p>
+            </div>
 
-            <Button
-              text={t('projects.buttonText', lang)}
-              href={`/projects/${project.slug}/`}
-              variant="outline"
-              size="sm"
-            />
+            <div class="mt-auto">
+              <Button
+                text={t('projects.buttonText', lang)}
+                href={`/projects/${project.slug}/`}
+                variant="outline"
+                size="sm"
+              />
+            </div>
           </div>
         </div>
       ))}
