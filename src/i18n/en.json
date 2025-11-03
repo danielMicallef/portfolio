@@ -189,12 +189,17 @@
     "title": "Contact",
     "subtitle": "Have questions or want to collaborate on a project? I look forward to hearing from you!",
     "emailTitle": "Email",
-    "emailButtonText": "Send Email",
+    "emailButtonText": "Send an email",
     "phoneTitle": "Phone",
-    "phoneButtonText": "Call",
+    "phoneButtonText": "Call me",
+    "callButtonText": "Book a call",
     "linkedinTitle": "LinkedIn",
-    "linkedinButtonText": "Open Profile",
-    "contactFormLink": "https://formspree.io/f/mzzjnleq"
+    "linkedinButtonText": "View Profile",
+    "contactFormLink": "https://formspree.io/f/mzzjnleq",
+    "calTitle": "Book a Call",
+    "calUrl": "https://cal.com/daniel-micallef-dev",
+    "calText": "Book a Call",
+    "calButtonText": "Schedule a meeting"
   },
   "footer": {
     "copyright": "All rights reserved.",
